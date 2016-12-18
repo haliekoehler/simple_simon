@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Simon</title>
+    <link rel="stylesheet" href="css/simple-simon.css">
+
+</head>
+<body>
+
+<!-- Header -->
+<h1>Simple Simon</h1>
+
+<!-- Level Display -->
+<h2>Level:<span id="levelCnt"></span></h2>
+
+<!-- Text Div -->
+<div id="textDiv">
+    <p id="gameText">Welcome! Click Start button to begin</p>
+</div> <!-- End of Text Div -->
+
+<!-- Game Board -->
+<div id="gameContainer" class="container">
+    <!-- Tile Container -->
+    <div id="tileContainer" class="container">
+        <div class="tile" id="red"></div>
+        <div class="tile" id="blue"></div>
+        <div class="tile" id="green"></div>
+        <div class="tile" id="yellow"></div>
+    </div> <!-- End of Tile Container -->
+</div> <!-- End of Game Board -->
+
+<button id="startBtn" class="btn">START</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/simple-simon.js"></script>
+</body>
+</html>
