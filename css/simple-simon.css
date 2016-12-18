@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Orbitron|Righteous');
 
 body {
     background-color: dimgrey;
@@ -21,20 +21,12 @@ h1 {
     align-content: stretch;
 }
 
-#levelText {
-    display: flex;
-    font-family: 'Righteous', cursive;
-    text-align: center;
-    font-size: 2em;
-    letter-spacing: 2px;
-}
-
 .btn {
     height: 25%;
     width: 25%;
     font-family: 'Righteous', cursive;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2em;
     border-radius: 10px;
     background-color: black;
     color: ghostwhite;
@@ -44,30 +36,65 @@ h1 {
     font-family: 'Righteous', cursive;
     text-align: center;
     font-size: 1.5em;
+    align-items: center;
+}
+
+#levelText {
+    display: flex;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 2.5em;
+    color: white;
+    justify-content: center;
 }
 
 #gameContainer {
     background-color: black;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
     height: 350px;
     width: 350px;
-    border-radius: 50px;
+    border-radius: 100%;
     padding: 2px;
 }
 
 #tileContainer {
+    z-index: 0;
     align-content: space-around;
     margin: 2px;
+    position: relative;
 
 }
 
+#centerCircle {
+    z-index: 1;
+    background-color: black;
+    border-radius: 100%;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    display: block;
+    float: inherit;
+    margin-left: 125px;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+}
+
+#simonLight {
+    background-color
+}
+
 .tile {
+    z-index: 0;
     display: flex;
     align-self: auto;
     flex-wrap: wrap;
-    height: 170px;
-    width: 170px;
-    opacity: .5;
+    height: 160px;
+    width: 160px;
+    opacity: .6;
+    margin: 5px;
+    /*position: absolute;*/
 }
 
 .active {
@@ -77,22 +104,22 @@ h1 {
 
 #red {
     background-color: red;
-    border-radius: 50px 0 0 0;
+    border-radius: 100% 0 0 0;
 }
 
 #blue {
     background-color: blue;
-    border-radius: 0 50px 0 0;
+    border-radius: 0 100% 0 0;
 }
 
 #green {
     background-color: green;
-    border-radius: 0 0 0 50px;
+    border-radius: 0 0 0 100%;
 }
 
 #yellow {
     background-color: yellow;
-    border-radius: 0 0 50px 0;
+    border-radius: 0 0 100% 0;
 }
 
 .container {

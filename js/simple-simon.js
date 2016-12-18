@@ -83,7 +83,7 @@ function compBuild() {
 
 // ----- USER TURN
 function userTurn() {
-    activateBoard();
+    // activateBoard();
     userText();
 }
 
