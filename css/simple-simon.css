@@ -81,10 +81,6 @@ h1 {
     position: absolute;
 }
 
-#simonLight {
-    background-color
-}
-
 .tile {
     z-index: 0;
     display: flex;
@@ -92,7 +88,7 @@ h1 {
     flex-wrap: wrap;
     height: 160px;
     width: 160px;
-    opacity: .6;
+    opacity: .4;
     margin: 5px;
     /*position: absolute;*/
 }
@@ -129,4 +125,16 @@ h1 {
     flex-wrap: wrap;
     align-items: center;
     align-content: space-around;
+}
+
+.turnLight {
+    background-color: transparent;
+    color:black;
+    opacity: .5;
+    font-size: 1.2em;
+}
+
+.activeLight {
+    background-color: chartreuse;
+    color: black;
 }

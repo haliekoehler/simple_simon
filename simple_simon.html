@@ -19,11 +19,11 @@
 <div id="controlsDiv" class="container column">
     <!-- Text Div -->
     <div id="textDiv" class="row">
-        <p id="gameText">Welcome! Click Start button to begin</p>
+        <p id="gameText">Welcome! Click Start button to begin!</p>
     </div> <!-- End of Text Div -->
 
     <!-- Start Button -->
-    <button id="startBtn" class="btn box">START</button>
+    <button type="button" id="startBtn" class="btn box">START</button>
 
     <!-- Level Display -->
     <!--<h2 id="levelText" class="box">Level: <span id="levelCnt">  &#45;&#45; </span></h2>-->
@@ -37,15 +37,15 @@
         </div>
         <!-- Tile Container -->
         <div id="tileContainer" class="row">
-            <div class="tile" id="red"></div>
-            <div class="tile" id="blue"></div>
-            <div class="tile" id="green"></div>
-            <div class="tile" id="yellow"></div>
+            <div class="tile" id="red" onclick="playerPush(this.id)"></div>
+            <div class="tile" id="blue" onclick="playerPush(this.id)"></div>
+            <div class="tile" id="green" onclick="playerPush(this.id)"></div>
+            <div class="tile" id="yellow" onclick="playerPush(this.id)"></div>
         </div> <!-- End of Tile Container -->
     </div> <!-- End of Game Board -->
 
-    <button id="simonLight" class="btn boxlight">SIMON'S TURN</button>
-    <button id="userLight" class="btn boxlight">YOUR TURN</button>
+    <button disabled id="simonLight" class="btn turnLight">Simon's Turn</button>
+    <button disabled id="userLight" class="btn turnLight">Your Turn</button>
 
 </div>
 

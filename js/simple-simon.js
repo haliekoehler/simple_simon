@@ -1,155 +1,145 @@
 'use strict';
 
-var counter = 0;
-var compArray = [];
-// var interval;
-var level = 0;
-var tiles = $('.tile');
-var active = true;
-// var mode = normal;
+var game = {
+    counter: 0,
+    tiles: ['#red', '#blue', '#green', '#yellow'],
+    simon: [],
+    player: [],
+    sound:{
+        red: new Audio('audio/SFX_1.mp3'),
+        blue: new Audio('audio/SFX_2.mp3'),
+        green: new Audio('audio/SFX_3.mp3'),
+        yellow: new Audio('audio/SFX_4.mp3'),
+        start: new Audio('audio/PowerUp1.mp3'),
+        end: new Audio('audio/PowerDown2.mp3'),
+    }
+};
 
 
-// ----- RANDOM NUMBER BETWEEN 0 - 3
-function randomNumber() {
-    return Math.floor((Math.random() * 4));
+function newGame(){
+    resetGame();
+    addCounter();
+    simonMove();
 }
 
-// ----- RANDOM TILE SELECTION
-function randomTile() {
-    return tiles[randomNumber()];
+function resetGame(){
+    game.counter = 0;
+    game.simon = [];
+    game.player = [];
 }
 
-// ----- FLASH SELECTED TILE
-function flashTile(tile) {
-    $("#" + tile).addClass("active");
-    setTimeout(function() {
-        $("#" + tile).removeClass("active");
+function resetPlayer(){
+    game.player = [];
+}
+
+function addCounter(){
+    ($('#levelCnt').text(" " + ++game.counter));
+}
+
+function newLevel(){
+    console.log('New Level!');
+    $('#gameText').text('Simon\'s Turn');
+    addCounter();
+    // flashAll(0);
+    simonMove();
+}
+
+function playSound(tile){
+    switch(tile) {
+        case'#red':
+            game.sound.red.play();
+            break;
+        case '#blue':
+            game.sound.blue.play();
+            break;
+        case '#green':
+            game.sound.green.play();
+            break;
+        case '#yellow':
+            game.sound.yellow.play();
+            break;
+    }
+}
+
+function flashTile(tile){
+    $('' + tile + '').addClass('active');
+    setTimeout(function(){
+        $('' + tile + '').removeClass('active');
     }, 250);
 }
 
-// ----- FLASH ALL TILES (aesthetic purposes only)
-function flashAll(index) {
-    if(tiles.length > index) {
-        var tile = tiles[index];
-        setTimeout(function() {
-            flashTile($(tile).attr('id'));
-            flashAll(++index);
-        }, 50);
-    }
+// ----- flash all tiles (aesthetic purposes only)
+// function flashAll(index) {
+//     if(game.tiles.length > index) {
+//         var tile = game.tiles[index];
+//         setTimeout(function() {
+//             flashTile(tile);
+//             flashAll(++index);
+//         }, 50);
+//     }
+// }
+
+function simonMove(){
+    console.log('Simon\'s Move');
+    game.simon.push(game.tiles[(Math.floor(Math.random()*4))]);
+    showSimon();
+    console.log(game.simon);
+    playerMove();
+
 }
 
-// ----- SIMON GAME TEXT
-function simonText(){
-        $('#gameText').text('Watch for Simon\'s Selection!');
-}
-
-// ----- USER GAME TEXT
-function userText() {
-        $('#gameText').text('Your Turn! Repeat Simon\'s Sequence!');
-}
-
-//
-
-// ----- START GAME
-function startGame() {
-    compArray = [];
-    level = 0;
-    flashAll(0);
-    $('#levelCnt').text(" " + ++level);
-}
-
-// ----- COMP ARRAY PLAY-BACK
-function playBack(array) {
+function showSimon(){
     var i = 0;
-    var interval = setInterval(function(){
-        var tile = array[i];
-        flashTile(tile);
+    var moves = setInterval(function(){
+        flashTile(game.simon[i]);
+        playSound(game.simon[i]);
         i++;
-        if (i >= array.length){
-            clearInterval(interval);
+        if (i >= game.simon.length) {
+            clearInterval(moves);
         }
-    }, 1000)
+    }, 700);
+
+    resetPlayer();
 }
 
-// ----- COMPUTER SELECTION / BUILD ONTO ARRAY
-function compBuild() {
-    // deactivateBoard();
-    simonText();
-    var tile = randomTile();
-    compArray.push($(tile).attr('id'));
-    playBack(compArray);
-    userTurn();
+function playerPush(id){
+    var tile = "#"+id;
+    console.log(tile);
+    game.player.push(tile);
+    flashTile(tile);
+    setTimeout(function() {
+        playSound(tile);
+    }, 100);
+    playerMove(tile);
 }
 
-// ----- USER TURN
-function userTurn() {
-    // activateBoard();
-    userText();
-}
-
-$('.tile').click(function () {
-    var userInput = $(this).attr('id');
-    flashTile('' + userInput+ '');
-    if (userInput == compArray[counter]) {
-        console.log(counter);
-        console.log('match');
-        counter += 1;
-        console.log(compArray.length);
-        if (counter == compArray.length) {
-            console.log('Full Sequence Match!');
-            counter = 0;
-                newLevel();
-        }
+function playerMove(tile){
+    ($('#gameText').html('Your Move'));
+    console.log('Player\'s Move');
+    if (game.player[game.player.length - 1] !== game.simon[game.player.length -1]){
+        gameOver();
+        resetGame();
     } else {
-        endGame();
-        console.log('Something Went Wrong');
+        console.log('Success');
+        var compare = game.player.length === game.simon.length;
+        if (compare){
+            $('#gameText').text('Correct! Next Level!');
+            newLevel();
+        }
     }
-});
-
-// ----- NEW LEVEL
-function newLevel() {
-    ($('#gameText').text('Correct! New Level!'));
-    ($('#levelCnt').text(" " + ++level));
-    flashAll(0);
-    compBuild();
 }
 
+function gameOver(){
+    game.sound.end.play();
+    $('#startBtn').text('RESTART');
+    alert('GAME OVER! Please try again');
+}
 
-// ----- ACTIVATE BOARD FOR USER TURN
-//     function activateBoard() {
-//         active = true;
-//         $('.tile').on('click');
-//         console.log('Board is now Activated')
-//     }
-
-
-// ----- DEACTIVATE BOARD FOR COMPUTER TURN
-//     function deactivateBoard() {
-//         active = false;
-//         $('.tile').off('click');
-//         console.log('Board not-active');
-//     }
-//
-
-// ----- GAME OVER, GO HOME
-function endGame() {
-    alert('WRONG!');
-} // end of endGame();
-
-
-
-
-
-$(document).ready(function () {
-
-    $('#startBtn').click(function () {
-        startGame();
-
-        // deactivateBoard();
-
-        compBuild();
-
+$(document).ready(function(){
+    $('#startBtn').click(function(){
+        $('#startBtn').text('START');
+        game.sound.start.play();
+        console.log('NEW GAME BEGAN!');
+        newGame();
     });
-
-
-}); // --- end of DOCUMENT.READY
+});
