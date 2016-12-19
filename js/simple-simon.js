@@ -36,7 +36,7 @@ function addCounter(){
 }
 
 function newLevel(){
-    $('#gameText').text('Simon\'s Turn');
+    // $('#gameText').text('Simon\'s Turn');
     addCounter();
     simonMove();
 }
@@ -66,11 +66,10 @@ function flashTile(tile){
 }
 
 function simonMove(){
-    $('#simonLight').addClass('activeLight');
+    // $('#gameText').text('Simon\'s Turn');
     game.simon.push(game.tiles[(Math.floor(Math.random()*4))]); // get random # between 0 - 3 and push to simon []
     showSimon(); // show current sequence in simon []
     playerMove(); //begin player's turn
-    $('#simonLight').removeClass('activeLight');
 }
 
 function showSimon(){
@@ -98,7 +97,6 @@ function playerPush(id){
 }
 
 function playerMove(tile){
-    $('#userLight').addClass('activeLight');
     if (game.player[game.player.length - 1] !== game.simon[game.player.length -1]){
         gameOver();
         resetGame();
@@ -108,7 +106,6 @@ function playerMove(tile){
             newLevel();
         }
     }
-    $('#userLight').removeClass('activeLight');
 }
 
 function gameOver(){
