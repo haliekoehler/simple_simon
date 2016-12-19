@@ -15,11 +15,10 @@ var game = {
     }
 };
 
-
 function newGame(){
-    resetGame();
-    addCounter();
-    simonMove();
+    resetGame(); // mainly for "restarts"
+    addCounter(); // increment level counter
+    simonMove();  // begin simon's first move
 }
 
 function resetGame(){
@@ -37,10 +36,8 @@ function addCounter(){
 }
 
 function newLevel(){
-    console.log('New Level!');
     $('#gameText').text('Simon\'s Turn');
     addCounter();
-    // flashAll(0);
     simonMove();
 }
 
@@ -68,24 +65,12 @@ function flashTile(tile){
     }, 250);
 }
 
-// ----- flash all tiles (aesthetic purposes only)
-// function flashAll(index) {
-//     if(game.tiles.length > index) {
-//         var tile = game.tiles[index];
-//         setTimeout(function() {
-//             flashTile(tile);
-//             flashAll(++index);
-//         }, 50);
-//     }
-// }
-
 function simonMove(){
-    console.log('Simon\'s Move');
-    game.simon.push(game.tiles[(Math.floor(Math.random()*4))]);
-    showSimon();
-    console.log(game.simon);
-    playerMove();
-
+    $('#simonLight').addClass('activeLight');
+    game.simon.push(game.tiles[(Math.floor(Math.random()*4))]); // get random # between 0 - 3 and push to simon []
+    showSimon(); // show current sequence in simon []
+    playerMove(); //begin player's turn
+    $('#simonLight').removeClass('activeLight');
 }
 
 function showSimon(){
@@ -99,34 +84,31 @@ function showSimon(){
         }
     }, 700);
 
-    resetPlayer();
+    resetPlayer(); // reset player [] for next round
 }
 
 function playerPush(id){
     var tile = "#"+id;
-    console.log(tile);
-    game.player.push(tile);
+    game.player.push(tile); // push clicked tile to play []
     flashTile(tile);
     setTimeout(function() {
         playSound(tile);
     }, 100);
-    playerMove(tile);
+    playerMove(tile); // compare clicked tiles to simon []
 }
 
 function playerMove(tile){
-    ($('#gameText').html('Your Move'));
-    console.log('Player\'s Move');
+    $('#userLight').addClass('activeLight');
     if (game.player[game.player.length - 1] !== game.simon[game.player.length -1]){
         gameOver();
         resetGame();
     } else {
-        console.log('Success');
         var compare = game.player.length === game.simon.length;
         if (compare){
-            $('#gameText').text('Correct! Next Level!');
             newLevel();
         }
     }
+    $('#userLight').removeClass('activeLight');
 }
 
 function gameOver(){
@@ -136,10 +118,15 @@ function gameOver(){
 }
 
 $(document).ready(function(){
+
     $('#startBtn').click(function(){
+
         $('#startBtn').text('START');
+
         game.sound.start.play();
+
         console.log('NEW GAME BEGAN!');
         newGame();
+
     });
 });
