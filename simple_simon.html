@@ -4,52 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Simple Simon</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <link rel="stylesheet" href="css/simple-simon.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <!--<link rel="stylesheet" href="css/simple-simon.css">-->
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
 
 
-<div id="headerDiv" class="container">
-    <!-- Header -->
+<div id="headerDiv" class="container-fluid">
     <h1>Simple Simon</h1>
 </div>
 
-<div id="controlsDiv" class="container column">
+<div id="controlsDiv" class="container col-md-10 col-md-offset-1">
     <!-- Text Div -->
-    <div id="textDiv" class="row">
+    <div id="textDiv">
         <p id="gameText">Welcome! Click Start button to begin!</p>
     </div> <!-- End of Text Div -->
 
     <!-- Start Button -->
-    <button type="button" id="startBtn" class="btn box">START</button>
+    <button type="button" id="startBtn" class="btn">START</button>
+</div><!-- end of controlsDiv -->
 
-</div>
+<div id="gameDiv" class="container col-md-10 col-md-offset-1">
 
-<div id="gameDiv" class="container column">
-    <!-- Game Board -->
-    <div id="gameContainer" class="row">
-        <div id="centerCircle" class="box">
-            <p id="levelText"><span id="levelCnt">  0 </span></p>
-        </div>
+        <p id="levelText">Level: <span id="levelCnt"> 0 </span></p>
+
         <!-- Tile Container -->
-        <div id="tileContainer" class="row">
-            <div class="tile" id="red" onclick="playerPush(this.id)"></div>
-            <div class="tile" id="blue" onclick="playerPush(this.id)"></div>
-            <div class="tile" id="green" onclick="playerPush(this.id)"></div>
-            <div class="tile" id="yellow" onclick="playerPush(this.id)"></div>
+        <div id="tileContainer">
+            <div class="tile col-xs-6" id="red" onclick="playerPush(this.id)"></div>
+            <div class="tile col-xs-6 col-offset-xs-6" id="blue" onclick="playerPush(this.id)"></div>
+            <div class="tile col-xs-6" id="green" onclick="playerPush(this.id)"></div>
+            <div class="tile col-xs-6 col-offset-xs-6" id="yellow" onclick="playerPush(this.id)"></div>
         </div> <!-- End of Tile Container -->
-    </div> <!-- End of Game Board -->
-
-    <!--<button disabled id="simonLight" class="btn turnLight">Simon's Turn</button>-->
-    <!--<button disabled id="userLight" class="btn turnLight">Your Turn</button>-->
-
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script><!-- jQuery JS -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>&lt;!&ndash; Sweet Alert JS &ndash;&gt;-->
 <script src="js/simple-simon.js"></script>
 </body>
 </html>
